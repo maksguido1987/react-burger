@@ -1,15 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap");
+@import "./styles/global-scrollbar.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "JetBrains Mono", "Segoe UI", "Roboto", sans-serif;
+  background-color: #131316;
+  color: #f2f2f3;
+}
+
 .app {
   width: 100%;
   padding: 0;
+  min-height: 100vh;
 }
 
 .main {
-  background-color: #131316;
-}
-
-.main {
+  width: 100%;
   max-width: 1280px;
   margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.content {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   gap: 40px;

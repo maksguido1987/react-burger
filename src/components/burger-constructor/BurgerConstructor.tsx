@@ -6,6 +6,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { mockData } from "../../utils/data";
 import styles from "./BurgerConstructor.module.css";
+import { combineScrollbarClass } from "../../utils/scrollbar-classes";
 
 export const BurgerConstructor = () => {
   // Моковые данные для демонстрации
@@ -43,7 +44,12 @@ export const BurgerConstructor = () => {
           </div>
         )}
 
-        <div className={styles.constructorItemsCenter}>
+        <div
+          className={combineScrollbarClass(
+            styles.constructorItemsCenter,
+            "default"
+          )}
+        >
           {constructorItems.map((item) => (
             <div key={item._id} className={styles.draggableItem}>
               <div className={styles.dragIcon}>

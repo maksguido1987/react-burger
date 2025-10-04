@@ -3,6 +3,7 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Ingredient, IngredientType } from "./lib/types";
 import { mockData } from "../../utils/data";
 import { combineScrollbarClass } from "../../utils/scrollbar-classes";
+import { Ingredient as IngredientComponent } from "./ingredient/Ingredient";
 import styles from "./BurgerIngredients.module.css";
 
 export const BurgerIngredients = () => {
@@ -28,23 +29,6 @@ export const BurgerIngredients = () => {
   const filteredIngredients = (type: IngredientType): Ingredient[] => {
     return mockData.filter((ingredient) => ingredient.type === type);
   };
-
-  const renderIngredient = (ingredient: Ingredient) => (
-    <div key={ingredient._id} className={styles.ingredientItem}>
-      <div className={styles.imageContainer}>
-        <img
-          src={ingredient.image}
-          alt={ingredient.name}
-          className={styles.ingredientImage}
-        />
-      </div>
-      <div className={styles.price}>
-        <span className={styles.priceValue}>{ingredient.price}</span>
-        <span className={styles.priceIcon}>💎</span>
-      </div>
-      <div className={styles.name}>{ingredient.name}</div>
-    </div>
-  );
 
   return (
     <section className={styles.container}>
@@ -72,7 +56,9 @@ export const BurgerIngredients = () => {
       <p className="text text_type_main-medium">{getSectionTitle(activeTab)}</p>
       <div className={combineScrollbarClass(styles.ingredients, "default")}>
         <div className={styles.ingredientsGrid}>
-          {filteredIngredients(activeTab).map(renderIngredient)}
+          {filteredIngredients(activeTab).map((ingredient) => (
+            <IngredientComponent key={ingredient._id} ingredient={ingredient} />
+          ))}
         </div>
       </div>
     </section>

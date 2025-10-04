@@ -3,6 +3,7 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Ingredient, IngredientType } from "./lib/types";
 import { combineScrollbarClass } from "../../utils/scrollbar-classes";
 import { Ingredient as IngredientComponent } from "./ingredient/Ingredient";
+import { Modal, IngredientDetails } from "../modal";
 import styles from "./BurgerIngredients.module.css";
 
 interface BurgerIngredientsProps {
@@ -11,6 +12,10 @@ interface BurgerIngredientsProps {
 
 export const BurgerIngredients = ({ ingredients }: BurgerIngredientsProps) => {
   const [activeTab, setActiveTab] = useState<IngredientType>("bun");
+  const [selectedIngredient, setSelectedIngredient] =
+    useState<Ingredient | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<{
     [key in IngredientType]: HTMLDivElement | null;
@@ -47,6 +52,16 @@ export const BurgerIngredients = ({ ingredients }: BurgerIngredientsProps) => {
 
   const getIngredientsByType = (type: IngredientType): Ingredient[] => {
     return ingredients.filter((ingredient) => ingredient.type === type);
+  };
+
+  const handleIngredientClick = (ingredient: Ingredient) => {
+    setSelectedIngredient(ingredient);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedIngredient(null);
   };
 
   const handleScroll = () => {
@@ -133,12 +148,19 @@ export const BurgerIngredients = ({ ingredients }: BurgerIngredientsProps) => {
                 <IngredientComponent
                   key={ingredient._id}
                   ingredient={ingredient}
+                  onClick={handleIngredientClick}
                 />
               ))}
             </div>
           </div>
         ))}
       </div>
+
+      {isModalOpen && selectedIngredient && (
+        <Modal title="Детали ингредиента" onClose={handleCloseModal}>
+          <IngredientDetails ingredient={selectedIngredient} />
+        </Modal>
+      )}
     </section>
   );
 };

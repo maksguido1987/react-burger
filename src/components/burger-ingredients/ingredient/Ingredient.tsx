@@ -3,11 +3,27 @@ import styles from "./Ingredient.module.css";
 
 interface IngredientProps {
   ingredient: IngredientType;
+  onClick: (ingredient: IngredientType) => void;
 }
 
-export const Ingredient = ({ ingredient }: IngredientProps) => {
+export const Ingredient = ({ ingredient, onClick }: IngredientProps) => {
+  const handleIngredientClick = () => {
+    onClick(ingredient);
+  };
+
   return (
-    <div className={styles.ingredientItem}>
+    <div
+      className={styles.ingredientItem}
+      onClick={handleIngredientClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleIngredientClick();
+        }
+      }}
+    >
       <div className={styles.imageContainer}>
         <img
           src={ingredient.image}

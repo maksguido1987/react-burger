@@ -4,28 +4,20 @@ import {
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { mockData } from "../../utils/data";
+import { Ingredient } from "../burger-ingredients/lib/types";
 import styles from "./BurgerConstructor.module.css";
 import { combineScrollbarClass } from "../../utils/scrollbar-classes";
 
-export const BurgerConstructor = () => {
-  // Моковые данные для демонстрации
-  const selectedBun = mockData.find((item) => item.type === "bun");
-  const constructorItems = [
-    mockData.find((item) => item._id === "60666c42cc7b410027a1a9b5"),
-    mockData.find((item) => item._id === "60666c42cc7b410027a1a9b6"),
-    mockData.find((item) => item._id === "60666c42cc7b410027a1a9b7"),
-    mockData.find((item) => item._id === "60666c42cc7b410027a1a9b4"),
-    mockData.find((item) => item._id === "60666c42cc7b410027a1a9b9"),
-    mockData.find((item) => item._id === "60666c42cc7b410027a1a9bb"),
-    mockData.find((item) => item._id === "60666c42cc7b410027a1a9bd"),
-    mockData.find((item) => item._id === "60666c42cc7b410027a1a9b3"),
-    mockData.find((item) => item._id === "60666c42cc7b410027a1a9bf"),
-    mockData.find((item) => item._id === "60666c42cc7b410027a1a9ba"),
-  ].filter(Boolean) as typeof mockData;
+interface BurgerConstructorProps {
+  ingredients: Ingredient[];
+}
+
+export const BurgerConstructor = ({ ingredients }: BurgerConstructorProps) => {
+  // Выбираем первую доступную булочку
+  const selectedBun = ingredients.find((item) => item.type === "bun");
 
   const totalPrice =
-    constructorItems.reduce((sum, item) => sum + item.price, 0) +
+    ingredients.reduce((sum, item) => sum + item.price, 0) +
     (selectedBun ? selectedBun.price * 2 : 0);
 
   return (
@@ -50,7 +42,7 @@ export const BurgerConstructor = () => {
             "default"
           )}
         >
-          {constructorItems.map((item) => (
+          {ingredients.map((item) => (
             <div key={item._id} className={styles.draggableItem}>
               <div className={styles.dragIcon}>
                 <DragIcon type="primary" />

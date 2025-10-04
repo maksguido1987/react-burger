@@ -1,4 +1,2 @@
-// Утилиты для проекта
-
 export * from "./scrollbar-classes";
-export * from "./data";
+export * from "./api-variables";

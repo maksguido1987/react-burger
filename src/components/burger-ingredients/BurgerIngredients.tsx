@@ -1,12 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Ingredient, IngredientType } from "./lib/types";
-import { mockData } from "../../utils/data";
 import { combineScrollbarClass } from "../../utils/scrollbar-classes";
 import { Ingredient as IngredientComponent } from "./ingredient/Ingredient";
 import styles from "./BurgerIngredients.module.css";
 
-export const BurgerIngredients = () => {
+interface BurgerIngredientsProps {
+  ingredients: Ingredient[];
+}
+
+export const BurgerIngredients = ({ ingredients }: BurgerIngredientsProps) => {
   const [activeTab, setActiveTab] = useState<IngredientType>("bun");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<{
@@ -43,7 +46,7 @@ export const BurgerIngredients = () => {
   };
 
   const getIngredientsByType = (type: IngredientType): Ingredient[] => {
-    return mockData.filter((ingredient) => ingredient.type === type);
+    return ingredients.filter((ingredient) => ingredient.type === type);
   };
 
   const handleScroll = () => {

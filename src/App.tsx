@@ -20,8 +20,12 @@ function App() {
               Ошибка загрузки данных: {error}
             </p>
           )}
-          <BurgerIngredients ingredients={ingredients} />
-          <BurgerConstructor ingredients={ingredients} />
+          {!error && !isLoading && (
+            <>
+              <BurgerIngredients ingredients={ingredients} />
+              <BurgerConstructor ingredients={ingredients} />
+            </>
+          )}
         </div>
       </main>
     </div>

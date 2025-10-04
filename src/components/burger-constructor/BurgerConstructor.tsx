@@ -6,7 +6,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
 import { Ingredient } from "../burger-ingredients/lib/types";
-import { Modal } from "../modal";
+import { Modal, OrderDetails, generateOrderNumber } from "../modal";
 import styles from "./BurgerConstructor.module.css";
 import { combineScrollbarClass } from "../../utils/scrollbar-classes";
 
@@ -16,6 +16,7 @@ interface BurgerConstructorProps {
 
 export const BurgerConstructor = ({ ingredients }: BurgerConstructorProps) => {
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+  const [orderNumber, setOrderNumber] = useState<string>("");
 
   // Выбираем первую доступную булочку
   const selectedBun = ingredients.find((item) => item.type === "bun");
@@ -25,6 +26,8 @@ export const BurgerConstructor = ({ ingredients }: BurgerConstructorProps) => {
     (selectedBun ? selectedBun.price * 2 : 0);
 
   const handleOrderClick = () => {
+    const newOrderNumber = generateOrderNumber();
+    setOrderNumber(newOrderNumber);
     setIsOrderModalOpen(true);
   };
 
@@ -100,18 +103,8 @@ export const BurgerConstructor = ({ ingredients }: BurgerConstructorProps) => {
       </div>
 
       {isOrderModalOpen && (
-        <Modal title="Заказ оформлен!" onClose={handleCloseOrderModal}>
-          <div style={{ textAlign: "center", padding: "20px 0" }}>
-            <p className="text text_type_main-medium">
-              Ваш заказ успешно оформлен!
-            </p>
-            <p className="text text_type_main-default text_color_inactive">
-              Номер заказа: #{Math.floor(Math.random() * 100000)}
-            </p>
-            <p className="text text_type_main-default text_color_inactive">
-              Общая стоимость: {totalPrice} 💎
-            </p>
-          </div>
+        <Modal onClose={handleCloseOrderModal}>
+          <OrderDetails orderNumber={orderNumber} />
         </Modal>
       )}
     </section>

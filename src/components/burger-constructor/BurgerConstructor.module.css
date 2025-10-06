@@ -1,0 +1,54 @@
+.constructorSection {
+  padding: 50px 0 0;
+}
+
+.constructorItem {
+  max-width: 536px;
+  padding: 0 16px 0 0;
+}
+
+.constructorItems {
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 16px;
+}
+
+.constructorItemsCenter {
+  max-height: 385px;
+  overflow-y: auto;
+}
+
+.draggableItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  cursor: move;
+}
+
+.dragIcon {
+  display: flex;
+  cursor: move;
+}
+
+.priceSection {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 40px;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.price {
+  font-family: "Iceland", sans-serif;
+  font-size: 48px;
+  color: #f2f2f3;
+}

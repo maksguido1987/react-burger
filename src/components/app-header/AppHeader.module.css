@@ -1,0 +1,28 @@
+.appHeader {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #2f2f37;
+  background-color: #1C1C21;
+}
+
+.nav {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 16px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  flex: 1 0 33%;
+  gap: 16px;
+}
+
+.navItem:last-child {
+  justify-content: flex-end;
+}

@@ -1,0 +1,24 @@
+.tabs {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0;
+  margin-bottom: 20px;
+}
+
+.ingredients {
+  margin-top: 20px;
+  overflow-y: auto;
+  max-height: 620px;
+  padding-right: 8px;
+}
+
+.ingredientsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 16px;
+  margin-bottom: 40px;
+}
+
+.ingredientsGrid:last-child {
+  margin-bottom: 0;
+}
